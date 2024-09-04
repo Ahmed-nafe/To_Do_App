@@ -31,11 +31,7 @@ class _HomescreenState extends State<Homescreen> {
         backgroundColor: const Color(0xff9395D3),
       ),
       body: ListView(
-
-        children: [
-
-          for (final value in todos) _todoitem(value)
-        ],
+        children: [for (final value in todos) _todoitem(value)],
       ),
       floatingActionButton: InkWell(
         onTap: () {
@@ -91,7 +87,7 @@ class _HomescreenState extends State<Homescreen> {
                     InkWell(
                         onTap: () {},
                         child:
-                        SvgPicture.asset("assets/images/CheckCircle.svg")),
+                            SvgPicture.asset("assets/images/CheckCircle.svg")),
                   ])
                 ],
               ),

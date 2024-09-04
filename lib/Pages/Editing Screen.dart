@@ -9,6 +9,7 @@ class Edit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         backgroundColor: const Color(0xff9395D3),
         actions: const [
           Icon(Icons.arrow_back_sharp),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo/Pages/HomeScreen.dart';
+import 'package:todo/Pages/ToDoItemModel.dart';
 
 class Addtask extends StatefulWidget {
   static const String routeName = "AddTask";
@@ -11,7 +12,7 @@ class Addtask extends StatefulWidget {
 }
 
 class _AddtaskState extends State<Addtask> {
-  Homescreen _homeScreen = Homescreen();
+
   TextEditingController controller = TextEditingController();
 
   @override
@@ -19,9 +20,6 @@ class _AddtaskState extends State<Addtask> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff9395D3),
-        actions: const [
-          Icon(Icons.arrow_back_sharp),
-        ],
         title: const Text("Add Task"),
       ),
       body: Padding(
@@ -39,6 +37,7 @@ class _AddtaskState extends State<Addtask> {
             const SizedBox(
               height: 20,
             ),
+
             TextFormField(
               decoration: const InputDecoration(
                 contentPadding: EdgeInsets.all(8),
@@ -46,6 +45,7 @@ class _AddtaskState extends State<Addtask> {
               ),
             ),
             const SizedBox(height: 20),
+
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:todo/Pages/AddTask.dart';
+import 'package:todo/Pages/Completed.dart';
 import 'package:todo/Pages/Editing%20Screen.dart';
+import 'package:todo/Pages/ToDoItemModel.dart';
+import 'package:todo/Pages/ToDoListItem.dart';
 
 class Homescreen extends StatefulWidget {
   static const String routeName = "HomeScreen";
@@ -13,26 +16,41 @@ class Homescreen extends StatefulWidget {
 }
 
 class _HomescreenState extends State<Homescreen> {
-  List<String> todos = [];
+  List<ToDoItem> todos = [];
+  List <Widget> Tabs = [ToDoListItem() , Completed()];
   TextEditingController controller = TextEditingController();
-
+int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffD6D7EF),
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: (index){
+          setState(() {
+            currentIndex = index ;
+          });
+        },
+        currentIndex: currentIndex,
+          items:  const [
+            BottomNavigationBarItem(
+
+                label: "All",
+                icon: Icon(Icons.menu)),
+            BottomNavigationBarItem(
+                label: "Complete",
+                icon: Icon(Icons.check_outlined)
+            )
+          ]
+      ),
       appBar: AppBar(
         actions: const [
-          Padding(
-            padding: EdgeInsets.all(15.0),
-            child: Icon(Icons.date_range_sharp),
-          ),
+          Icon(Icons.date_range_sharp),
         ],
         title: Text("TodoApp".toUpperCase()),
         backgroundColor: const Color(0xff9395D3),
       ),
-      body: ListView(
-        children: [for (final value in todos) _todoitem(value)],
-      ),
+      body:Tabs[currentIndex],
+
       floatingActionButton: InkWell(
         onTap: () {
           Navigator.pushNamed(context, Addtask.routeName);
@@ -46,55 +64,5 @@ class _HomescreenState extends State<Homescreen> {
     );
   }
 
-  Widget _todoitem(String value) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(6),
-          child: Card(
-            elevation: 10,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        value,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xff9395D3)),
-                      ),
-                      const Text(
-                        "description",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w400,
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(context, Edit.routeName);
-                        },
-                        child: SvgPicture.asset("assets/images/Pencil.svg")),
-                    InkWell(
-                        onTap: () {},
-                        child: SvgPicture.asset("assets/images/Trash.svg")),
-                    InkWell(
-                        onTap: () {},
-                        child:
-                            SvgPicture.asset("assets/images/CheckCircle.svg")),
-                  ])
-                ],
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+
 }

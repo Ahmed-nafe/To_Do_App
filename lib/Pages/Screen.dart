@@ -16,7 +16,6 @@ class Screen extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routes: {
           Homescreen.routeName: (_) => Homescreen(),
-          // Addtask.routeName: (_) => Addtask(),
           Edit.routeName: (_) => Edit(),
         },
         initialRoute: Homescreen.routeName,

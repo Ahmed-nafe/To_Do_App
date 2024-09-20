@@ -19,20 +19,22 @@ class _ToDoListItemState extends State<ToDoListItem> {
 
   @override
   Widget build(BuildContext context) {
-    return toDoItemList();
-  }
-
-  Widget toDoItemList() {
     return BlocBuilder<TodosCubit, TodosState>(
       builder: (context, state) {
         if (state is TodosSucceed) {
+          if (state.todos.isEmpty) {
+            return const Center(
+              child: Text("No Items Founded"),
+            );
+          }
           state.todos;
-          return ListView.builder(
+          return
+            ListView.builder(
               itemCount: state.todos.length,
               itemBuilder: (context, index) {
                 final todoItem = state.todos[index];
                 if (state.todos.isEmpty) {
-                  return Center(
+                  return const Center(
                     child: Text("Your Deleted All Todos"),
                   );
                 }
@@ -52,7 +54,7 @@ class _ToDoListItemState extends State<ToDoListItem> {
                                 children: [
                                   SizedBox(
                                     width:
-                                        MediaQuery.of(context).size.width * 0.6,
+                                    MediaQuery.of(context).size.width * 0.6,
                                     child: Text(
                                       maxLines: 1,
                                       softWrap: true,
@@ -65,7 +67,7 @@ class _ToDoListItemState extends State<ToDoListItem> {
                                   ),
                                   SizedBox(
                                     width:
-                                        MediaQuery.of(context).size.width * 0.6,
+                                    MediaQuery.of(context).size.width * 0.6,
                                     child: Text(
                                       maxLines: 3,
                                       overflow: TextOverflow.ellipsis,
@@ -98,21 +100,6 @@ class _ToDoListItemState extends State<ToDoListItem> {
                                 InkWell(
                                   onTap: () {
                                     setState(() {
-                                      if (!todoItem.isChecked) {
-                                        context
-                                            .read<TodosCubit>()
-                                            .completedTodoItem(index);
-                                        todoItem.isChecked =
-                                            !todoItem.isChecked;
-                                      }
-                                      if (todoItem.isChecked) {
-                                        context
-                                            .read<TodosCubit>()
-                                            .deleteTodoItemFromCompeleted(
-                                                index);
-                                        // state.completedTodos.remove(context);
-                                        if (state is Completed) {}
-                                      }
                                       todoItem.isChecked = !todoItem.isChecked;
                                     });
                                   },
@@ -133,21 +120,12 @@ class _ToDoListItemState extends State<ToDoListItem> {
                 );
               });
         } else {
-          return const Center(child: Text("No Items Founded"));
+          return const Center(
+            child: Text("No Items Founded"),
+          );
         }
       },
     );
   }
 
-  Widget complete() {
-    // final completeedTask = todos.where((_element) => _element.isChecked ).toList();
-    // return ListView.builder(
-    //     itemCount: completeedTask.length,
-    //     itemBuilder: (context, index) {
-    //       return _todoitem(todos[index]);
-    //     });
-    return Container(
-      color: Colors.red,
-    );
-  }
 }

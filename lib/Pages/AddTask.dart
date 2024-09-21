@@ -92,6 +92,7 @@ class _AddtaskState extends State<Addtask> {
                     if (formKey.currentState!.validate()) {
                       context.read<TodosCubit>().addTodosItemToList(
                             ToDoItemModel(
+                              id: 0,
                               title: titleController.text,
                               description: descriptionController.text,
                             ),

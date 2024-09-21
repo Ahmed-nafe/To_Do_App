@@ -83,7 +83,8 @@ class _ToDoListItemState extends State<ToDoListItem> {
                                 InkWell(
                                     onTap: () {
                                       Navigator.pushNamed(
-                                          context, Edit.routeName);
+                                          context, Edit.routeName,
+                                          arguments: todoItem);
                                     },
                                     child: SvgPicture.asset(
                                         "assets/images/Pencil.svg")),

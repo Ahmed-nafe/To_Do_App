@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/Pages/ToDoItemModel.dart';
-import 'package:todo/Pages/ToDoListItem.dart';
-import 'package:todo/Pages/todos_cubit.dart';
+import 'package:todo/Pages/model/ToDoItemModel.dart';
+import 'package:todo/Pages/all_todos_items/ToDoListItem.dart';
+import 'package:todo/Pages/cuibt/todos_cubit.dart';
 
 class Addtask extends StatefulWidget {
   static const String routeName = "AddTask";
@@ -88,18 +88,20 @@ class _AddtaskState extends State<Addtask> {
                   backgroundColor: const Color(0xff9395D3),
                 ),
                 onPressed: () {
-                  setState(() {
-                    if (formKey.currentState!.validate()) {
-                      context.read<TodosCubit>().addTodosItemToList(
-                            ToDoItemModel(
-                              id: 0,
-                              title: titleController.text,
-                              description: descriptionController.text,
-                            ),
-                          );
-                      // Navigator.pop(context);
-                    }
-                  });
+                  setState(
+                    () {
+                      if (formKey.currentState!.validate()) {
+                        context.read<TodosCubit>().addTodosItemToList(
+                              ToDoItemModel(
+                                id: 0,
+                                title: titleController.text,
+                                description: descriptionController.text,
+                              ),
+                            );
+                        Navigator.pop(context);
+                      }
+                    },
+                  );
                 },
                 child: Text(
                   "add".toUpperCase(),

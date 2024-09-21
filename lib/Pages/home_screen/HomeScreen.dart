@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:todo/Pages/AddTask.dart';
-import 'package:todo/Pages/Completed.dart';
-import 'package:todo/Pages/Editing%20Screen.dart';
-import 'package:todo/Pages/ToDoItemModel.dart';
-import 'package:todo/Pages/ToDoListItem.dart';
+import 'package:todo/Pages/completed_items/Completed.dart';
+import 'package:todo/Pages/all_todos_items/ToDoListItem.dart';
 
 class Homescreen extends StatefulWidget {
   static const String routeName = "HomeScreen";
@@ -12,10 +10,10 @@ class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
 
   @override
-  State<Homescreen> createState() => _HomescreenState();
+  State<Homescreen> createState() => _HomeScreenState();
 }
 
-class _HomescreenState extends State<Homescreen> {
+class _HomeScreenState extends State<Homescreen> {
   List<Widget> Tabs = [
     const ToDoListItem(),
     const Completed(),
@@ -25,8 +23,8 @@ class _HomescreenState extends State<Homescreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xffD6D7EF),
-
       appBar: AppBar(
         actions: const [
           Icon(Icons.date_range_sharp),
@@ -34,23 +32,21 @@ class _HomescreenState extends State<Homescreen> {
         title: const Text("ToDoApp"),
         backgroundColor: const Color(0xff9395D3),
       ),
-
       body: Tabs[currentIndex],
-
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-
           showModalBottomSheet(
-            isScrollControlled: true,
+              isScrollControlled: true,
               context: context,
               builder: (context) => const Addtask(),
               elevation: 15);
         },
-        backgroundColor:  Colors.blueAccent,
+        backgroundColor: Colors.blueAccent,
         child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           onTap: (index) {
             setState(() {
               currentIndex = index;

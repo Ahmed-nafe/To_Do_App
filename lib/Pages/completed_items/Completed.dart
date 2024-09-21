@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:todo/Pages/Editing%20Screen.dart';
-import 'package:todo/Pages/todos_cubit.dart';
+import 'package:todo/Pages/edit_items/Editing%20Screen.dart';
+import 'package:todo/Pages/cuibt/todos_cubit.dart';
 
 class Completed extends StatefulWidget {
   const Completed({super.key});

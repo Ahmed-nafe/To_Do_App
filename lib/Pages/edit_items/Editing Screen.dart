@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo/Pages/ToDoItemModel.dart';
-import 'package:todo/Pages/todos_cubit.dart';
+import 'package:todo/Pages/model/ToDoItemModel.dart';
+import 'package:todo/Pages/cuibt/todos_cubit.dart';
 
 class Edit extends StatefulWidget {
   static const String routeName = "edit";
